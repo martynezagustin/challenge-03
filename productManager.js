@@ -62,18 +62,37 @@ class ProductManager {
 
 //instancia de creacion
 const pManager = new ProductManager()
+let products = []
 
-const product1 = pManager.addProduct("Product 1", "Este es el producto 1", 200, "Sin imagen", "abc123", 25)
-const product2 = pManager.addProduct("Product 2", "Este es el producto 2", 421, "Sin imagen", "ddss321", 12)
-const product3 = pManager.addProduct("Product 3", "Este es el producto 3", 497, "Sin imagen", "hfr5", 18)
+for (let i = 0; i < 10; i++) {
+    const price = Math.floor(Math.random() * 100 + 1)
+    const code = Math.random()
+    const stock = Math.floor(Math.random() * 40 + 1)
+    const product = pManager.addProduct(`Product ${i}`, `Este es el producto ${i}`, price , "Sin imagen", code , stock)
+    products.push(product)
+}
 
-//add product
-const products = [
-    product1,
-    product2,
-    product3
-]
+//lista de products
 
-app.get(port, (req,res) => {
-    res.send(productos)
+
+app.get("/products/:id", (req, res) => {
+    const id = req.params.id
+    const product = products.find((p) => p.id === parseInt(id))
+    if(product){
+        res.json(product)
+    } else {
+        return res.status(404).json({error: "Producto no encontrado"})
+    }
+})
+
+//limite a pedir de
+app.get("/products", (req, res) => {
+    const limit = req.query.limit
+    if(limit){
+        const limitNumber = parseInt(limit)
+        const limitedProducts = products.slice(0, limitNumber)
+        res.json(limitedProducts)
+    } else {
+        res.json(products)
+    }
 })
