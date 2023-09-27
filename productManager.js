@@ -64,6 +64,7 @@ class ProductManager {
 const pManager = new ProductManager()
 let products = []
 
+//generar productos
 for (let i = 0; i < 10; i++) {
     const price = Math.floor(Math.random() * 100 + 1)
     const code = Math.random()
