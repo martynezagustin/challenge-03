@@ -1,13 +1,6 @@
-const fs = require("node:fs")
-const express = require("express")
-const app = express()
-const port = 8080
+import fs from "fs";
 
-app.listen(port, () => {
-    console.log("la app se esta escuchando");
-})
-
-class ProductManager {
+export class ProductManager {
     constructor() {
         this.products = []
         this.nextId = 0
@@ -61,8 +54,8 @@ class ProductManager {
 
 
 //instancia de creacion
-const pManager = new ProductManager()
-let products = []
+export const pManager = new ProductManager()
+export let products = []
 
 //generar productos
 for (let i = 0; i < 10; i++) {
@@ -75,25 +68,3 @@ for (let i = 0; i < 10; i++) {
 
 //lista de products
 
-
-app.get("/products/:id", (req, res) => {
-    const id = req.params.id
-    const product = products.find((p) => p.id === parseInt(id))
-    if(product){
-        res.json(product)
-    } else {
-        return res.status(404).json({error: "Producto no encontrado"})
-    }
-})
-
-//limite a pedir de
-app.get("/products", (req, res) => {
-    const limit = req.query.limit
-    if(limit){
-        const limitNumber = parseInt(limit)
-        const limitedProducts = products.slice(0, limitNumber)
-        res.json(limitedProducts)
-    } else {
-        res.json(products)
-    }
-})
