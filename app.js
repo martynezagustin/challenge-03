@@ -1,5 +1,5 @@
 import express from "express"
-import { pManager, products } from "./productManager.js"
+import { pManager } from "./productManager.js"
 const app = express()
 const port = 8080
 
@@ -29,3 +29,11 @@ app.get("/products", (req, res) => {
     }
 })
 
+app.post("/products/:pid", (req, res) => {
+    try {
+        const productito = pManager.addProduct("Hola", "d", 223, "not", 2321, 223)
+        res.json({mensaje: "Datos cargados", producto: productito})
+    } catch (error) {
+        res.status(400).json({error: error.message})   
+    }
+})

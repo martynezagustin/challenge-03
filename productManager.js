@@ -1,9 +1,26 @@
 import fs from "fs";
 
 export class ProductManager {
-    constructor() {
+    constructor(filePath) {
+        this.path = filePath
         this.products = []
         this.nextId = 0
+        this.loadProducts()
+    }
+    saveProducts(){
+        try{
+            fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2), 'utf8')
+        } catch (error) {
+            console.error("Error al guardar productos", error);
+        }
+    }
+    loadProducts(){
+        try {
+            const data = fs.readFileSync(this.path, 'utf8')
+            this.products = JSON.parse(data)
+        } catch (error) {
+            this.products = []
+        }
     }
     addProduct(title, description, price, thumbnail, code, stock) {
         if (!title || !description || !price || !thumbnail || !code || !stock) {
