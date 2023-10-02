@@ -28,12 +28,3 @@ app.get("/products", (req, res) => {
         res.json(products)
     }
 })
-
-app.post("/products/:pid", (req, res) => {
-    try {
-        const productito = pManager.addProduct("Hola", "d", 223, "not", 2321, 223)
-        res.json({mensaje: "Datos cargados", producto: productito})
-    } catch (error) {
-        res.status(400).json({error: error.message})   
-    }
-})
