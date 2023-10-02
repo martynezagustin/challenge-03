@@ -1,1 +1,1 @@
-Nombre: Product 9. Descripcion: Este es el producto 9. Precio: 86. Código: 0.9703162564323888. Stock: 39
+Nombre: Product 9. Descripcion: Este es el producto 9. Precio: 38. Código: 0.7263302441007442. Stock: 23

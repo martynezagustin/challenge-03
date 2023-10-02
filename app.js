@@ -1,5 +1,5 @@
 import express from "express"
-import { pManager } from "./productManager.js"
+import { pManager, products } from "./productManager.js"
 const app = express()
 const port = 8080
 
